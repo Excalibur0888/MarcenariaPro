@@ -1,0 +1,125 @@
+/* Burger menu styles */
+.burger-menu {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 15px;
+    z-index: 1001;
+    position: relative;
+}
+
+.burger-menu span {
+    display: block;
+    width: 30px;
+    height: 2px;
+    margin: 6px 0;
+    background-color: var(--primary-color);
+    transition: all 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+}
+
+@media (max-width: 992px) {
+    .burger-menu {
+        display: block;
+    }
+
+    .nav-list {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        height: 100vh;
+        background: var(--primary-color);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        transition: all 0.5s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+        z-index: 1000;
+    }
+
+    .nav-list.active {
+        right: 0;
+    }
+
+    .nav-list li {
+        opacity: 0;
+        transform: translateX(50px);
+        transition: all 0.4s ease;
+        transition-delay: calc(0.1s * var(--i));
+    }
+
+    .nav-list.active li {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .nav-list a {
+        font-size: 2rem;
+        color: var(--white);
+    }
+
+    .nav-list a::after {
+        background: var(--secondary-color);
+        height: 3px;
+        bottom: -10px;
+    }
+
+    body.menu-open {
+        overflow: hidden;
+    }
+
+    .burger-menu.active span {
+        background-color: var(--white);
+    }
+
+    .burger-menu.active span:nth-child(1) {
+        transform: rotate(45deg) translate(8px, 8px);
+    }
+
+    .burger-menu.active span:nth-child(2) {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    .burger-menu.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(8px, -8px);
+    }
+
+    /* Menu background animation */
+    .menu-bg {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--primary-color);
+        z-index: 999;
+        clip-path: circle(0% at 100% 0);
+        transition: clip-path 0.6s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+        visibility: hidden;
+    }
+
+    body.menu-open .menu-bg {
+        clip-path: circle(150% at 100% 0);
+        visibility: visible;
+    }
+
+    /* Menu items animation */
+    .nav-list li {
+        --i: 0;
+    }
+
+    .nav-list li:nth-child(1) { --i: 1; }
+    .nav-list li:nth-child(2) { --i: 2; }
+    .nav-list li:nth-child(3) { --i: 3; }
+    .nav-list li:nth-child(4) { --i: 4; }
+    .nav-list li:nth-child(5) { --i: 5; }
+}
+
+@media (max-width: 576px) {
+    .nav-list a {
+        font-size: 1.5rem;
+    }
+} 
